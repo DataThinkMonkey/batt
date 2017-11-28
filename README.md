@@ -1,7 +1,9 @@
 # batt
 Laptop battery log generator and warning.
-script to check battery and notify all terminals and KDE notifcation if
+Script to check battery and notify all terminals and KDE notifcation if
 battery goes below 15%.
+
+Depends on acpi, so it needs to be installed to work.
 
 batt.log file created in current directory.
 
