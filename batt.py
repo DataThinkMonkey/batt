@@ -13,32 +13,22 @@ bat = batinfo.Batteries()
 capacity = bat.stat[0].capacity
 status = bat.stat[0].status 
 update = bat.update()
-# Variable for date and time.
-year = datetime.datetime.now().strftime("%Y")
-mon = datetime.datetime.now().strftime("%m")
-day = datetime.datetime.now().strftime("%d")
-time = datetime.datetime.now().strftime("%T")
-# timestamp used for log file.
-btime = year + "-" + mon + "-" + day + " " + time 
+# Variables for date and time used for log file.
+btime = datetime.datetime.now().strftime("%Y-%m-%d %T")
 # Log status
-lstatus = btime + " Battery is " + status + " at " + str(capacity) + repr("%.") 
+lstatus = btime + " Battery is " + status + " at " + str(capacity) 
+# create the log file a=apend and +=if does not already exist. Other options are w=write, or r=read.
+blog = open("/home/jared/batt.log","a+")
 
 update
 if capacity > 15 or status == "Charging":
-    print (lstatus)
+    # Write message to log. Carriage return and new line.
+    blog.write("\r\n" + lstatus)
+    # Close file after used.
+    blog.close()
 elif capacity < 7 and status != "Charging":
-    print ("Battery is critical at" + capacity + "and has not been plugged in.\nShutting Down in 1 minute. ")
+    blog.write("\r\nBattery is critical at" + capacity + "and has not been plugged in.\nShutting Down in 1 minute. ")
+    blog.close()
 else:
-    print ("Battery is critical at" + capacity + "Plug in laptop immediately.")
-
-
-# bat.stat
-# bat.stat[0]
-# bat.stat[0].capacity
-# print bat.stat[0]
-# bat.stat[0].manufacturer
-# bat.stat[0].technology
-# bat.stat[0].charge_full
-# bat.stat[0].charge_now
-# bat.update()
-
+    blog.write("\r\nBattery is critical at" + capacity + "Plug in laptop immediately.")
+    blog.close()
