@@ -33,14 +33,14 @@ if capacity > 15 or status == "Charging":
     blog.close()
 # if bat is < 7 and not charging, broadcast message and shutdown.    
 elif capacity < 7 and status != "Charging":
-    blog.write("\r\nBattery is critical at" + str(capacity) + "and has not been plugged in.\nShutting Down in 1 minute.")
+    blog.write("\r\n" + btime + " Battery is critical at " + str(capacity) + " and has not been plugged in.\nShutting Down in 1 minute.")
     blog.close()
     os.system("echo 'Battery is critical and will shutdown down in 1 min.' | wall")
     os.system("echo 'To cancel shutdown, sudo shutdown -c' | wall")
     os.system("shutdown -h -t 1")
 # Batt is > then 7 but < 15, broadcast message to plug in.   
 else:
-    blog.write("\r\nBattery is critical at" + str(capacity) + "Plug in laptop immediately.")
+    blog.write("\r\n" + btime + " Battery is critical at " + str(capacity) + ". Plug in laptop immediately.")
     blog.close()
     os.system("echo 'Battery is critical. Plug in laptop immediately.' | wall")
 
