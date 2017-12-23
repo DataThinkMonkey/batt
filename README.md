@@ -11,6 +11,9 @@ Use crontab to set up scheduled task. My configuration is set to run every 3 min
 ```
 */3 * * * *     /home/jared/bin/batt.sh
 ```
+```
+*/3 * * * *     python3 /home/jared/bin/batt.py
+```
 
 To-do
 1. Have script identify setuid for the /sbin/shutdown and show message and log. Possibly have script prompt to change for you.
